@@ -43,8 +43,14 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
   // Método para iniciar sesión con Google
   Future<User?> _signInWithGoogle(BuildContext context) async {
     try {
+      print('Iniciando sesión con Google...');
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) return null;
+      if (googleUser == null) {
+        print('Inicio de sesión cancelado por el usuario.');
+        return null;
+      }
+
+      print('Usuario de Google seleccionado: ${googleUser.displayName}');
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
@@ -59,11 +65,19 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
       User? user = userCredential.user;
 
       if (user != null) {
-        // Iniciar el proceso de creación del usuario en la base de datos en segundo plano
-        _createUserInDatabase(user); 
+        print('Inicio de sesión exitoso para el usuario: ${user.displayName} (${user.email})');
+        
+        // Redirigir al usuario a la pantalla principal inmediatamente
+        Navigator.of(context).pushReplacementNamed('/main');
+        
+        // Ejecutar la creación del usuario en la base de datos en segundo plano
+        Future.microtask(() => _createUserInDatabase(user));
+        
         return user;
+      } else {
+        print('Error: No se pudo obtener el usuario después de iniciar sesión con Google.');
+        return null;
       }
-      return null;
     } catch (e) {
       print('Error al iniciar sesión con Google: $e');
       return null;
@@ -72,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
 
   // Método para crear el usuario en la base de datos en segundo plano
   Future<void> _createUserInDatabase(User user) async {
+    print('Iniciando el proceso para crear el usuario en la base de datos...');
     final url = Uri.parse('https://coffee-manager-backend.onrender.com/users');
     final body = {
       "nombre": user.displayName ?? "Nombre desconocido",
@@ -100,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
             "Error al crear el usuario: Código de estado ${response.statusCode}, Respuesta: ${response.body}");
       }
     } catch (e) {
-      print("Error en la solicitud HTTP: $e");
+      print("Error en la solicitud HTTP para crear el usuario: $e");
     }
   }
 
@@ -155,12 +170,15 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
               // Botón de Google con sombra suave
               ElevatedButton.icon(
                 onPressed: () async {
+                  print('Botón de inicio de sesión con Google presionado.');
                   User? user = await _signInWithGoogle(context);
                   if (user != null) {
+                    print('Redirigiendo a la pantalla principal...');
                     // Redirigir al usuario a la pantalla principal inmediatamente
                     Navigator.of(context)
                         .pushReplacementNamed('/main'); // Redirigir a MainScreen
                   } else {
+                    print('Error: Usuario no autenticado.');
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Error: Usuario no autenticado.")),
                     );

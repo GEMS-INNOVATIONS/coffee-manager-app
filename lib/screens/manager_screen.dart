@@ -6,6 +6,7 @@ import 'panel_screen.dart';
 import 'misFincas_screen.dart';
 import 'administrar_screen.dart';
 import 'fincaDetail_screen.dart';
+import 'administrarPago_screen.dart';
 import 'perfil_screen.dart';
 import '../widgets/user_drawer.dart';
 
@@ -26,6 +27,7 @@ class _MainScreenState extends State<MainScreen> {
     FincaDetail(), // Pantalla de Detalle de Finca
     PerfilScreen(), // Pantalla de Perfil
     AdministrarScreen(), // Pantalla de Administración
+    AdministrarPagos(),
   ];
 
   @override

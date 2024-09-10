@@ -1,3 +1,4 @@
+import 'package:coffeemanager/screens/administrarPago_screen.dart';
 import 'package:coffeemanager/screens/administrar_screen.dart';
 import 'package:coffeemanager/screens/chat_ia_screen.dart';
 import 'package:coffeemanager/screens/fincaDetail_screen.dart';
@@ -11,6 +12,7 @@ import 'screens/home_screen.dart';
 import 'screens/add_screen.dart';
 import 'screens/panel_screen.dart';
 import 'screens/perfil_screen.dart';
+import 'screens/administrarPago_screen.dart';
 import 'screens/login_screen.dart'; // Asegúrate de importar el LoginScreen
 
 void main() async {
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget {
         '/misFincas': (context) => MisFincas(),
         '/fincaDetail': (context) => FincaDetail(),
         '/administrar': (context) => AdministrarScreen(),
+        '/administrarPagos': (context) => AdministrarPagos(),
         '/chatIA': (context) => ChatIAScreen(),
       },
     );

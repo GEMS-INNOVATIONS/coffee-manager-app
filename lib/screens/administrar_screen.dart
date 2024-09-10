@@ -56,7 +56,7 @@ class AdministrarScreen extends StatelessWidget {
               icon: Icons.attach_money,
               label: 'Administrar Pagos',
               gradientColors: [Colors.green[800]!, Colors.green[400]!],
-              route: '/pagos', // Cambia por la ruta correspondiente
+              route: '/administrarPagos', // Cambia por la ruta correspondiente
             ),
             SizedBox(height: 16),
             // Tarjeta de Administrar Recursos con degradado
