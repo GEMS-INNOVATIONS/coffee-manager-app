@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// Importa la pantalla FincaDetail
+import 'fincaDetail_screen.dart'; // Asegúrate de que la ruta sea correcta.
+
 class MisFincas extends StatefulWidget {
   @override
   _MisFincasScreenState createState() => _MisFincasScreenState();
@@ -45,8 +48,6 @@ class _MisFincasScreenState extends State<MisFincas> {
           ),
         ],
       ),
-     
-     
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -96,7 +97,14 @@ class _MisFincasScreenState extends State<MisFincas> {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                // Acción al presionar el botón Editar
+                // Navegar a la pantalla FincaDetail al presionar el botón Editar
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        FincaDetail(), // Redirige a la vista FincaDetail
+                  ),
+                );
               },
               icon: Icon(Icons.edit, color: Colors.white),
               label: Text('Editar'),

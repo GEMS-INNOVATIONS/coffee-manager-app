@@ -30,27 +30,34 @@ class UserDrawer extends StatelessWidget {
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
-                    _buildDrawerOption(
-                      icon: Icons.show_chart,
-                      label: 'Estadísticas',
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/panel');
-                      },
-                    ),
-                    _buildDrawerOption(
-                      icon: Icons.admin_panel_settings,
-                      label: 'Administración',
-                      onTap: () {},
-                    ),
-                    _buildDrawerOption(
-                      icon: Icons.park,
-                      label: 'Mi finca',
-                      onTap: () {},
-                    ),
+                    // _buildDrawerOption(
+                    //   icon: Icons.show_chart,
+                    //   label: 'Estadísticas',
+                    //   onTap: () {
+                    //     Navigator.of(context).pushNamed('/panel');
+                    //   },
+                    // ),
+                    // _buildDrawerOption(
+                    //   icon: Icons.admin_panel_settings,
+                    //   label: 'Administración',
+                    //   onTap: () {},
+                    // ),
+                    // _buildDrawerOption(
+                    //   icon: Icons.park,
+                    //   label: 'Mi finca',
+                    //   onTap: () {},
+                    // ),
                     _buildDrawerOption(
                       icon: Icons.trending_up,
                       label: 'Datos del mercado',
                       onTap: () {},
+                    ),
+                    _buildDrawerOption(
+                      icon: Icons.person,
+                      label: 'Perfil', // Nueva opción de perfil
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/perfil');
+                      },
                     ),
                   ],
                 ),

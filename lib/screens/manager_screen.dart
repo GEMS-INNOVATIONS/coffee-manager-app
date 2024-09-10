@@ -5,25 +5,27 @@ import 'add_screen.dart';
 import 'panel_screen.dart';
 import 'misFincas_screen.dart';
 import 'administrar_screen.dart';
+import 'fincaDetail_screen.dart';
+import 'perfil_screen.dart';
 import '../widgets/user_drawer.dart';
 
 class MainScreen extends StatefulWidget {
-  static final GlobalKey<_MainScreenState> mainScreenKey =
-      GlobalKey<_MainScreenState>();
-
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 1; // Por defecto, el índice de "Inicio"
+  int _selectedIndex = 1; // El índice por defecto es 1 para "Inicio"
 
+  // Lista de pantallas que se mostrarán en el cuerpo
   final List<Widget> _screens = [
-    PanelScreen(),
-    HomeScreen(),
-    AddScreen(),
-    MisFincas(),
-    AdministrarScreen(),
+    PanelScreen(), // Pantalla de Panel
+    HomeScreen(), // Pantalla de Inicio
+    AddScreen(), // Pantalla de Agregar
+    MisFincas(), // Pantalla de Mis Fincas
+    FincaDetail(), // Pantalla de Detalle de Finca
+    PerfilScreen(), // Pantalla de Perfil
+    AdministrarScreen(), // Pantalla de Administración
   ];
 
   @override
@@ -33,23 +35,24 @@ class _MainScreenState extends State<MainScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
+  // Método para cambiar de vista cuando se toca el ítem del menú
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _selectedIndex = index; // Cambia la pantalla en función del índice
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: MainScreen.mainScreenKey, // Asignamos la key aquí
-      drawer: UserDrawer(), // Drawer para el menú lateral
-      body: _screens[_selectedIndex], // Pantalla seleccionada
+      drawer: UserDrawer(), // Menú lateral
+      body: _screens[
+          _selectedIndex], // Pantalla que se muestra según el índice seleccionado
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.brown[800],
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
+        currentIndex: _selectedIndex, // Muestra el ítem seleccionado
+        selectedItemColor: Colors.brown[800], // Color del ítem seleccionado
+        unselectedItemColor: Colors.grey, // Color de los ítems no seleccionados
+        onTap: _onItemTapped, // Cambiar pantalla al tocar un ítem
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
